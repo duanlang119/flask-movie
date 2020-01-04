@@ -1,4 +1,4 @@
-from http_util import HTTP
+from app.libs.http_util import HTTP
 from flask import current_app
 
 class YuShuBook:
