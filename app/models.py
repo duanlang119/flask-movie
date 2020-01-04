@@ -179,6 +179,7 @@ class Oplog(db.Model):
         return "<Oplog {}>".format(self.id)
 
 if __name__ == '__main__':
+    pass
     # db.create_all()   # create all table
     # add a role
     """
@@ -190,13 +191,13 @@ if __name__ == '__main__':
     db.session.commit()
     """
 
-    from werkzeug.security import generate_password_hash
-
-    admin = Admin(
-        name="gordon",
-        pwd=generate_password_hash('123456'),
-        is_super=True,
-        role_id=1
-    )
-    db.session.add(admin)
-    db.session.commit()
+    # from werkzeug.security import generate_password_hash
+    #
+    # admin = Admin(
+    #     name="gordon",
+    #     pwd=generate_password_hash('123456'),
+    #     is_super=True,
+    #     role_id=1
+    # )
+    # db.session.add(admin)
+    # db.session.commit()
