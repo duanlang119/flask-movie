@@ -9,8 +9,8 @@ def create_app():
     app.config.from_object('app.settings')
     register_blueprint(app)
 
-    db.init_app(app)
-    db.create_all(app=app)
+    # db.init_app(app)
+    # db.create_all(app=app)
     return app
 
 def register_blueprint(app):

@@ -5,20 +5,30 @@ class YuShuBook:
     isbn_url = 'http://t.yushu.im/v2/book/isbn/{}'
     keyword_url = 'http://t.yushu.im/v2/book/search?q={}&start={}&count={}'
 
-    @classmethod
-    def search_by_isbn(cls,isbn):
-        url = cls.isbn_url.format(isbn)
-        result = HTTP.get(url)
-        # dict
-        return result
+    def __init__(self):
+        self.total = 0
+        self.books = []
 
-    @classmethod
-    def search_by_keyword(cls, keyword,page=0):
-        url = cls.keyword_url.format(keyword,current_app.config['PER_PAGE'],cls.calculate_start(page))
+    def search_by_isbn(self,isbn):
+        url = self.isbn_url.format(isbn)
+        result = HTTP.get(url)
+        self.__fill_single(result)
+
+    def __fill_single(self,data):
+        if data:
+            self.total = 1
+            self.books.append(data)
+
+    def __fill_conllection(self,data):
+        self.total = data['total']
+        self.books = data['books']
+
+    def search_by_keyword(self, keyword,page=1):
+        url = self.keyword_url.format(keyword,current_app.config['PER_PAGE'],self.calculate_start(page))
         print(url)
         result = HTTP.get(url)
         # dict
-        return result
+        self.__fill_conllection(result)
 
     @staticmethod
     def calculate_start(page):
