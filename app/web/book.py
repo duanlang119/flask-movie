@@ -1,6 +1,6 @@
 import json
 
-from flask import jsonify, request
+from flask import jsonify, request, render_template, flash
 
 from app.forms.book import SearchForm
 from app.view_models.book import BookCollection
@@ -29,3 +29,15 @@ def search():
         return json.dumps(books, default=lambda  o:o.__dict__)
     else:
         return jsonify(form.errors)
+
+
+
+@web.route('/test')
+def test():
+    r = {
+        "name":"happy",
+        'age' : 18
+    }
+    flash('hello qiyue',category='error')
+    flash('hello jiuyue1',category='warning')
+    return render_template('test.html',data=r)
